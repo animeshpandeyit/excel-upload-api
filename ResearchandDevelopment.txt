@@ -1,0 +1,263 @@
+// uploadData() {
+//   const formData = new FormData();
+
+//   // Create a new workbook
+//   const workbook = XLSX.utils.book_new();
+
+//   // Iterate over each sheet in the parsed data and add it to the new workbook
+//   for (const sheetName in this.sheetsData) {
+//     const sheetData = this.sheetsData[sheetName];
+//     const worksheet = XLSX.utils.json_to_sheet(sheetData);
+//     XLSX.utils.book_append_sheet(workbook, worksheet, sheetName);
+//   }
+
+//   // Convert the workbook to a binary buffer
+//   const excelBuffer = XLSX.write(workbook, {
+//     bookType: 'xlsx',
+//     type: 'array',
+//   });
+
+//   // Create a Blob from the buffer
+//   const excelFile = new Blob([excelBuffer], {
+//     type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+//   });
+
+//   formData.append('file', excelFile, 'data.xlsx'); // Ensure the field name is 'file'
+
+//   // Post the data to the backend
+//   this.dataService.postData(formData).subscribe({
+//     next: (response) => {
+//       this.apiResponse = response;
+//       console.log('Stored in apiResponse:', this.apiResponse);
+
+//       // Destructure the filtered valid and invalid data
+//       const { validData, invalidData } = response.data.reduce(
+//         (acc: any, item: any) => {
+//           if (item.data.isredflag) {
+//             acc.invalidData.push(item);
+//           } else {
+//             acc.validData.push(item);
+//           }
+//           return acc;
+//         },
+//         { validData: [], invalidData: [] }
+//       );
+
+//       // Assign the filtered data to component properties
+//       this.successData = validData;
+//       this.failureData = invalidData;
+
+//       // Log the data
+//       console.log('Valid Data:', this.successData);
+//       console.log('Invalid Data:', this.failureData);
+//       // this.exportDataToExcel();
+//     },
+
+//     error: (err) => {
+//       console.error('Error posting data:', err);
+//     },
+//   });
+// }
+
+// exportDataToExcel() {
+//   if (!Array.isArray(this.apiResponse)) {
+//     console.error('apiResponse is not an array:', this.apiResponse);
+//     return;
+//   }
+
+//   // Create new workbooks for valid and invalid data
+//   const validWorkbook = XLSX.utils.book_new();
+//   const invalidWorkbook = XLSX.utils.book_new();
+
+//   // Use reduce to separate valid and invalid data by sheetName
+//   const { validDataBySheet, invalidDataBySheet } = this.apiResponse.reduce(
+//     (acc, sheetResponse) => {
+//       const { sheetName, data } = sheetResponse;
+
+//       // Filter valid and invalid entries
+//       const validEntries = data.filter((item) => !item.isredflag);
+//       const invalidEntries = data.filter((item) => item.isredflag);
+
+//       // Accumulate valid data
+//       if (validEntries.length) {
+//         acc.validDataBySheet[sheetName] = validEntries;
+//       }
+
+//       // Accumulate invalid data
+//       if (invalidEntries.length) {
+//         acc.invalidDataBySheet[sheetName] = invalidEntries;
+//       }
+
+//       return acc;
+//     },
+//     {
+//       validDataBySheet: {} as { [key: string]: SheetData[] },
+//       invalidDataBySheet: {} as { [key: string]: SheetData[] },
+//     }
+//   );
+
+//   // Add valid data sheets to the valid workbook
+//   for (const sheetName in validDataBySheet) {
+//     const worksheet = XLSX.utils.json_to_sheet(validDataBySheet[sheetName]);
+//     XLSX.utils.book_append_sheet(validWorkbook, worksheet, sheetName);
+//   }
+
+//   // Add invalid data sheets to the invalid workbook
+//   for (const sheetName in invalidDataBySheet) {
+//     const worksheet = XLSX.utils.json_to_sheet(invalidDataBySheet[sheetName]);
+//     XLSX.utils.book_append_sheet(invalidWorkbook, worksheet, sheetName);
+//   }
+
+//   // Convert workbooks to binary buffers
+//   const validBuffer = XLSX.write(validWorkbook, {
+//     bookType: 'xlsx',
+//     type: 'array',
+//   });
+//   const invalidBuffer = XLSX.write(invalidWorkbook, {
+//     bookType: 'xlsx',
+//     type: 'array',
+//   });
+
+//   // Save the files
+//   const validBlob = new Blob([validBuffer], {
+//     type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+//   });
+//   const invalidBlob = new Blob([invalidBuffer], {
+//     type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+//   });
+
+//   saveAs(validBlob, 'Valid_Data.xlsx');
+//   saveAs(invalidBlob, 'Invalid_Data.xlsx');
+// }
+
+// exportDataToExcel() {
+//   if (!Array.isArray(this.apiResponse)) {
+//     console.error('apiResponse is not an array:', this.apiResponse);
+//     return;
+//   }
+
+//   // Create new workbooks for valid and invalid data
+//   const validWorkbook = XLSX.utils.book_new();
+//   const invalidWorkbook = XLSX.utils.book_new();
+
+//   // Use reduce to separate valid and invalid data by sheetName
+//   const { validDataBySheet, invalidDataBySheet } = this.apiResponse.reduce(
+//     (acc, sheetResponse) => {
+//       const { sheetName, data } = sheetResponse;
+
+//       // Filter valid and invalid entries
+//       const validEntries = data.filter((item) => !item.isredflag);
+//       const invalidEntries = data.filter((item) => item.isredflag);
+
+//       // Accumulate valid data
+//       if (validEntries.length) {
+//         acc.validDataBySheet[sheetName] = validEntries;
+//       }
+
+//       // Accumulate invalid data
+//       if (invalidEntries.length) {
+//         acc.invalidDataBySheet[sheetName] = invalidEntries;
+//       }
+
+//       return acc;
+//     },
+//     {
+//       validDataBySheet: {} as { [key: string]: SheetData[] },
+//       invalidDataBySheet: {} as { [key: string]: SheetData[] },
+//     }
+//   );
+
+//   // Add valid data sheets to the valid workbook
+//   for (const sheetName in validDataBySheet) {
+//     const worksheet = XLSX.utils.json_to_sheet(validDataBySheet[sheetName]);
+//     XLSX.utils.book_append_sheet(validWorkbook, worksheet, sheetName);
+//   }
+
+//   // Add invalid data sheets to the invalid workbook
+//   for (const sheetName in invalidDataBySheet) {
+//     const worksheet = XLSX.utils.json_to_sheet(invalidDataBySheet[sheetName]);
+//     XLSX.utils.book_append_sheet(invalidWorkbook, worksheet, sheetName);
+//   }
+
+//   // Convert workbooks to binary buffers
+//   const validBuffer = XLSX.write(validWorkbook, {
+//     bookType: 'xlsx',
+//     type: 'array',
+//   });
+//   const invalidBuffer = XLSX.write(invalidWorkbook, {
+//     bookType: 'xlsx',
+//     type: 'array',
+//   });
+
+//   // Save the files
+//   const validBlob = new Blob([validBuffer], {
+//     type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+//   });
+//   const invalidBlob = new Blob([invalidBuffer], {
+//     type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+//   });
+
+//   saveAs(validBlob, 'Valid_Data.xlsx');
+//   saveAs(invalidBlob, 'Invalid_Data.xlsx');
+// }
+// --------------------------
+// exportDataToExcel() {
+//   if (!this.apiResponse || typeof this.apiResponse !== 'object') {
+//     console.error('apiResponse is not in the expected object format:', this.apiResponse);
+//     return;
+//   }
+
+//   const validWorkbook = XLSX.utils.book_new();
+//   const invalidWorkbook = XLSX.utils.book_new();
+
+//   // Iterate over each sheet (e.g., "Sheet1", "Sheet2")
+//   for (const sheetName in this.apiResponse) {
+//     if (this.apiResponse.hasOwnProperty(sheetName)) {
+//       const sheetData = this.apiResponse[sheetName];
+
+//       // Separate valid and invalid entries based on isRedFlag
+//       const validEntries = sheetData.filter(item => !item.isRedFlag);
+//       const invalidEntries = sheetData.filter(item => item.isRedFlag);
+
+//       // Add valid entries to the valid workbook
+//       if (validEntries.length > 0) {
+//         const validSheet = XLSX.utils.json_to_sheet(validEntries);
+//         XLSX.utils.book_append_sheet(validWorkbook, validSheet, sheetName);
+//       }
+
+//       // Add invalid entries to the invalid workbook
+//       if (invalidEntries.length > 0) {
+//         const invalidSheet = XLSX.utils.json_to_sheet(invalidEntries);
+//         XLSX.utils.book_append_sheet(invalidWorkbook, invalidSheet, sheetName);
+//       }
+//     }
+//   }
+
+//   // Save the valid data Excel file
+//   const validBuffer = XLSX.write(validWorkbook, { bookType: 'xlsx', type: 'array' });
+//   saveAs(
+//     new Blob([validBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }),
+//     'Valid_Data.xlsx'
+//   );
+
+//   // Save the invalid data Excel file
+//   const invalidBuffer = XLSX.write(invalidWorkbook, { bookType: 'xlsx', type: 'array' });
+//   saveAs(
+//     new Blob([invalidBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }),
+//     'Invalid_Data.xlsx'
+//   );
+// }
+// ---------------
+
+// Destructure the filtered valid and invalid data
+// const { validData, invalidData } = response.data.reduce(
+//   (acc: any, item: any) => {
+//     if (item.data.isredflag) {
+//       acc.invalidData.push(item);
+//     } else {
+//       acc.validData.push(item);
+//     }
+//     return acc;
+//   },
+//   { validData: [], invalidData: [] }
+// );
