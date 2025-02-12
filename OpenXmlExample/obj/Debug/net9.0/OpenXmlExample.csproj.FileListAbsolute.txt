@@ -1,0 +1,15 @@
+F:\excel-upload-api\OpenXmlExample\bin\Debug\net9.0\OpenXmlExample.exe
+F:\excel-upload-api\OpenXmlExample\bin\Debug\net9.0\OpenXmlExample.deps.json
+F:\excel-upload-api\OpenXmlExample\bin\Debug\net9.0\OpenXmlExample.runtimeconfig.json
+F:\excel-upload-api\OpenXmlExample\bin\Debug\net9.0\OpenXmlExample.dll
+F:\excel-upload-api\OpenXmlExample\bin\Debug\net9.0\OpenXmlExample.pdb
+F:\excel-upload-api\OpenXmlExample\obj\Debug\net9.0\OpenXmlExample.GeneratedMSBuildEditorConfig.editorconfig
+F:\excel-upload-api\OpenXmlExample\obj\Debug\net9.0\OpenXmlExample.AssemblyInfoInputs.cache
+F:\excel-upload-api\OpenXmlExample\obj\Debug\net9.0\OpenXmlExample.AssemblyInfo.cs
+F:\excel-upload-api\OpenXmlExample\obj\Debug\net9.0\OpenXmlExample.csproj.CoreCompileInputs.cache
+F:\excel-upload-api\OpenXmlExample\obj\Debug\net9.0\OpenXmlExample.sourcelink.json
+F:\excel-upload-api\OpenXmlExample\obj\Debug\net9.0\OpenXmlExample.dll
+F:\excel-upload-api\OpenXmlExample\obj\Debug\net9.0\refint\OpenXmlExample.dll
+F:\excel-upload-api\OpenXmlExample\obj\Debug\net9.0\OpenXmlExample.pdb
+F:\excel-upload-api\OpenXmlExample\obj\Debug\net9.0\OpenXmlExample.genruntimeconfig.cache
+F:\excel-upload-api\OpenXmlExample\obj\Debug\net9.0\ref\OpenXmlExample.dll
