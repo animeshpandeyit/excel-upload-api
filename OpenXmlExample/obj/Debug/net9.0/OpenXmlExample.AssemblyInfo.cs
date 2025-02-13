@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OpenXmlExample")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3269d39bf77e0b34b7d8fc2dc4652553180ad6a7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d526681ab153770cf541a2216520cefb427954bf")]
 [assembly: System.Reflection.AssemblyProductAttribute("OpenXmlExample")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OpenXmlExample")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
